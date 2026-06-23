@@ -40,6 +40,15 @@ A decoupled, deterministic Text-to-SQL AI application built to query, analyze, a
    pip install -r requirements.txt
    uvicorn api:app --reload
 
+### Example Queries to Try
+* "Show me the top 10 players by overall rating."
+
+* "Compare Jude Bellingham and Kylian Mbappé."
+
+* "Which teams have the highest average player rating?"
+
+* "Show me the best strikers with pace above 85."
+
 ### 📊 The Interface
 
 **Direct Player Comparison & SQL Compilation:**
