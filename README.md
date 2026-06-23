@@ -39,3 +39,20 @@ A decoupled, deterministic Text-to-SQL AI application built to query, analyze, a
    ```bash
    pip install -r requirements.txt
    uvicorn api:app --reload
+
+### 📊 The Interface
+
+**Direct Player Comparison & SQL Compilation:**
+![Player Comparison](./assets/3.png)
+
+**Average Player Rating:**
+![Average Player Rating](./assets/1.png)
+
+**Best Striker with pace above 85:**
+![Best Striker with pace above 85](./assets/2.png)
+
+**Error Handling and Guard Rails:**
+![What is the weather in Bengaluru today?](./assets/4.png)
+
+**Short Analysis of the best value player**
+![Short Analysis of the best value player](./assets/5.png)
