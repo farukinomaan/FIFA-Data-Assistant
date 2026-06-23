@@ -1,6 +1,6 @@
 # ⚽ FIFA Agentic Data Assistant
 
-A decoupled, deterministic Text-to-SQL AI application built to query, analyze, and summarize the EA FC 26 player dataset.
+A decoupled, deterministic Text-to-SQL AI application built to query, analyze, and summarize the EA FC 26 player dataset from Kaggle.
 
 ## 🏗️ Architecture & Stack
 * **Frontend:** React (Vite) + Tailwind CSS (Monospace/Brutalist design)
@@ -8,7 +8,7 @@ A decoupled, deterministic Text-to-SQL AI application built to query, analyze, a
 * **Database:** SQLite (Populated via Pandas/Kaggle FC26 Dataset)
 * **LLM Engine:** Gemini 3.1 Flash-Lite (Agentic Text-to-SQL routing)
 
-## ✅ Assignment Requirements Fulfilled
+## ✅ Requirements Fulfilled
 
 **1. Data Input**
 * Ingested the EA Sports FC 26 Complete Player Dataset (18,000+ rows).
@@ -39,6 +39,28 @@ A decoupled, deterministic Text-to-SQL AI application built to query, analyze, a
    ```bash
    pip install -r requirements.txt
    uvicorn api:app --reload
+
+Since I can't trigger a direct file download in this chat window, I have provided the exact raw Markdown code below.
+
+Just click the **Copy code** button at the top right of the block, create a new file in your root folder named exactly `README.md`, and paste this in. GitHub will automatically render it perfectly!
+
+### Dataset used
+
+**EA Sports FC 26 Complete Player Dataset** (via Kaggle). The CSV data was cleaned and migrated into a local SQLite database (`players` table). It includes attributes such as player names, ages, nationalities, clubs, overall ratings, potential, wages, and detailed in-game stats (pace, shooting, passing, etc.).
+
+### Where I used AI / LLMs
+
+**Google Gemini 3.1 Flash-Lite** is utilized as the core logic engine in a two-step orchestration pipeline:
+
+1. **The Logic Compiler:** The LLM receives the user's natural language query alongside a strict database schema prompt and outputs raw SQLite code. (Includes programmatic Python guardrails to sanitize accents and handle sibling surname overlap via `UNION ALL`).
+2. **The Analyst Summarizer:** Once the SQL executes, the raw data array is passed *back* to the LLM (at `temperature=0.0`) to generate a strict, factual one-sentence summary of the returned numbers, acting as a human-readable UI layer.
+
+### Known limitations
+
+* **Database Roster Updates:** The app relies on a static snapshot of the FC26 dataset. Players who have recently retired, transferred, or were omitted from this specific Kaggle scrape will gracefully return a "No data available" response rather than live data.
+* **Typographical Fragility:** While custom regex intercepts and sanitizes accented characters (e.g., Mbappé to Mbappe) to prevent wildcard failures, heavily misspelled player names in the user prompt may still result in zero database matches.
+* **Ambiguous Aggregations:** Broad queries without explicit metrics (e.g., "Who is the best team?") rely on the LLM's assumption to sort by `Overall` rating.
+
 
 ### Example Queries to Try
 * "Show me the top 10 players by overall rating."
